@@ -1,12 +1,20 @@
 require 'rails_helper'
 
 # Classe controlador de usuário falsa, contrída apenas para fins de testes.
-class UsuarioController < ApplicationController
-    def login
+class UsuariosController < ApplicationController
+    def index
+    end
+    def show
+    end
+    def create
+    end
+    def update
+    end
+    def destroy
     end
   end
 
-RSpec.describe UsuarioController, type: :controller do
+RSpec.describe UsuariosController, type: :controller do
     context "Testes do controlador UsuarioController" do
         context "Teste da ação index" do
             it "teste deve retornar status 200" do
