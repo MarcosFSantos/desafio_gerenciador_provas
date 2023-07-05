@@ -2,33 +2,33 @@ require 'rails_helper'
 
 RSpec.describe UsuariosController, type: :controller do
     context "Testes do controlador UsuarioController" do
-        context "Teste da ação index" do
+        context "Teste da ação listar" do
             it "teste deve retornar status 200" do
-                get :index
+                get :listar
                 expect(response).to have_http_status(200)
             end
         end
-        context "Teste da ação show" do
+        context "Teste da ação mostrar" do
             it "teste deve retornar status 200" do
-                get :show, params: { id: 1}
+                get :mostrar, params: { id: 1}
                 expect(response).to have_http_status(200)
             end
         end
-        context "Teste da ação create" do
+        context "Teste da ação criar" do
             it "teste deve retornar status 200" do
-                post :create
+                post :criar
                 expect(response).to have_http_status(200)
             end
         end
-        context "Teste da ação update" do
+        context "Teste da ação atualizar" do
             it "teste deve retornar status 200" do
-                put :update, params: { id: 1}
+                put :atualizar, params: { id: 1}
                 expect(response).to have_http_status(200)
             end
         end
-        context "Teste da ação delete" do
+        context "Teste da ação destruir" do
             it "teste deve retornar status 200" do
-                delete :destroy, params: { id: 1}
+                delete :destruir, params: { id: 1}
                 expect(response).to have_http_status(200)
             end
         end
