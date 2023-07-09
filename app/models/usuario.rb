@@ -1,5 +1,5 @@
 class Usuario < ApplicationRecord
-    has_secure_password
+    has_secure_password # Usa o BCrypt para armazenar a senha "password" em um hash criptografado chamado "password_digest"
 
     validates :nome, presence: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

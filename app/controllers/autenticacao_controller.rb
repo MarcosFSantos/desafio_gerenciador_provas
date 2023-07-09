@@ -6,8 +6,8 @@ class AutenticacaoController < ApplicationController
         @usuario = Usuario.find_by_email(params[:email])
         if @usuario&.authenticate(params[:password])
             token = JsonWebTokenUtilitarios.codificar(id_usuario: @usuario.id)
-            tempo = Time.now + 24.hours.to_i
-            render json: { token: token, expiracao: tempo.strftime("%m-%d-%Y %H:%M"), matricula: @usuario.matricula }, status: :ok
+            tempo_expiracao = Time.now + 24.hours.to_i
+            render json: { token: token, expiracao: tempo_expiracao.strftime("%m-%d-%Y %H:%M"), matricula: @usuario.matricula }, status: :ok
         else
             render json: { error: 'unauthorized' }, status: :unauthorized
         end

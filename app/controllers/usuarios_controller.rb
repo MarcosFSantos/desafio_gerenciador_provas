@@ -37,10 +37,11 @@ class UsuariosController < ApplicationController
 
     private
 
+    # Procura o usuário pela matrícula
     def encontrar_usuario
         @usuario = Usuario.find_by_matricula!(params[:matricula])
         rescue ActiveRecord::RecordNotFound
-            render json: { errors: 'Usuários não encontrado' }, status: :not_found
+            render json: { errors: 'Usuário não encontrado' }, status: :not_found
     end
 
     def parametros_usuario
