@@ -16,6 +16,7 @@ class UsuariosController < ApplicationController
     # Método de criação de um usuário
     def criar
         @usuario = Usuario.new(parametros_usuario)
+        @usuario.perfil = :participante unless @usuario.perfil.present?
         if @usuario.save
             render json: @usuario, status: :ok
         else
