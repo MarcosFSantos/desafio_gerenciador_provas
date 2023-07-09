@@ -7,4 +7,13 @@ class Usuario < ApplicationRecord
     validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
     enum perfil: { administrador: 0, participante: 1 }
+
+    before_validation :definir_perfil_padrao, on: :create # Chamado ao instaciar um objeto
+
+    private
+
+    def definir_perfil_padrao
+        self.perfil ||= :participante
+    end
+    
 end
