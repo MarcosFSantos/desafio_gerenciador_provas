@@ -8,7 +8,7 @@ RSpec.describe "Testes de rotas para provas" do
     end
     context "Testes de rotas de listagem de participantes de provas" do
         it "rota GET /provas/1/provas para controlador provas#listar_participantes" do
-            expect(get "/provas/1/provas").to route_to("provas#listar_participantes")
+            expect(get "/provas/1/provas").to route_to("provas#listar_participantes", id: "1")
         end
     end
     context "Testes de rotas de exibição individual de provas" do
