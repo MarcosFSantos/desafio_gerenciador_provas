@@ -7,4 +7,12 @@ class Usuario < ApplicationRecord
     validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
     enum perfil: { administrador: 0, participante: 1 }, _default: :participante
+
+    has_many (
+        :participantes, # Método responsável por retornar o array de 'Participante' da instância.
+        class_name: "Participante", # Nome da classe que Usuario tem relação.
+        foreign_key: "usuarios_id", # Chave estrangeira de usuarios presente na tabela participantes.
+        inverse_of: :usuario, # Método das instâncias de 'Participante' reponsável por retornar uma instância dessa classe.
+        dependent: :destroy # Destruir as instâncias de 'Participante' dependentes ao destruir uma instância desta classe.
+    )
 end
