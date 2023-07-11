@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   get "/participantes", to: "participantes#listar"
   get "/participantes/:id", to: "participantes#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/participantes", to: "participantes#criar"
-  put "/participantes/:id", to: "partipantes#atualizar", constraints: { id: /[1-9]\d*/ }
+  put "/participantes/:id", to: "participantes#atualizar", constraints: { id: /[1-9]\d*/ }
   delete "/participantes/:id", to: "participantes#destruir", constraints: { id: /[1-9]\d*/ }
 end
