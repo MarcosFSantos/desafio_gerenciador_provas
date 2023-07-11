@@ -7,13 +7,18 @@ RSpec.describe "Testes de rotas para usuarios" do
         end
     end
     context "Testes de rotas de listagem de usuarios" do
-        it "rota GET /usuarios para controlador usuario#listar" do
+        it "rota GET /usuarios para controlador usuarios#listar" do
             expect(get "/usuarios").to route_to("usuarios#listar")
         end
     end
     context "Testes de rotas de exibição individual de usuário" do
         it "rota GET /usuarios/1 para controlador usuario#mostrar" do
             expect(get "/usuarios/1").to route_to("usuarios#mostrar", matricula: "1")
+        end
+    end
+    context "Testes de rotas de listagem de participantes do usuário" do
+        it "rota GET /usuarios/1/participantes para controlador usuarios#listar_participantes" do
+            expect(get "/usuarios/1/participantes").to route_to("usuarios#listar_participantes", matricula: "1")
         end
     end
     context "Testes de rotas de criação de usuário" do

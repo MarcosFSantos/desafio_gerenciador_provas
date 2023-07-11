@@ -12,6 +12,11 @@ class UsuariosController < ApplicationController
     def mostrar
         render json: @usuario, status: :ok
     end
+
+    # Mostrar os participantes
+    def listar_participantes
+        render json: @usuario.participantes, status: :ok
+    end
     
     # Método de criação de um usuário
     def criar
