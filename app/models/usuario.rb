@@ -8,7 +8,7 @@ class Usuario < ApplicationRecord
 
     enum perfil: { administrador: 0, participante: 1 }, _default: :participante
 
-    has_many (
+    has_many(
         :participantes, # Método responsável por retornar o array de 'Participante' da instância.
         class_name: "Participante", # Nome da classe que Usuario tem relação.
         foreign_key: "usuarios_id", # Chave estrangeira de usuarios presente na tabela participantes.
