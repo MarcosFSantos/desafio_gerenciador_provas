@@ -10,6 +10,9 @@ RSpec.describe "Testes de rotas para participantes" do
         it "rota GET /participantes/1 para controlador participantes#mostrar" do
             expect(get "/participantes/1").to route_to("participantes#mostrar", id: "1")
         end
+        it "rota GET /participantes/0 deve não deve ser acessível" do
+            expect(get "/participantes/0").not_to be_routable
+        end
     end
     context "Testes de rotas de criação de participante" do
         it "rota POST /participantes para controlador participantes#criar" do
@@ -20,10 +23,16 @@ RSpec.describe "Testes de rotas para participantes" do
         it "rota PUT /participantes/1 para controlador participantes#atualizar" do
             expect(put "/participantes/1").to route_to("participantes#atualizar", id: "1")
         end
+        it "rota PUT /participantes/0 deve não deve ser acessível" do
+            expect(put "/participantes/0").not_to be_routable
+        end
     end
     context "Testes de rotas de exclusão de participante" do
         it "rota DELETE /participantes/1 para controlador participantes#destruir" do
             expect(delete "/participantes/1").to route_to("participantes#destruir", id: "1")
+        end
+        it "rota DELETE /participantes/0 deve não deve ser acessível" do
+            expect(delete "/participantes/0").not_to be_routable
         end
     end
 end
