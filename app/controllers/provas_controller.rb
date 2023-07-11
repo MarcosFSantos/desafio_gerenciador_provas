@@ -1,0 +1,2 @@
+class ProvasController < ApplicationController
+end
