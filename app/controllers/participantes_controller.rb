@@ -1,6 +1,6 @@
 class ParticipantesController < ApplicationController
     before_action :autorizar_requisicao
-    before_action :encontrar_participante
+    before_action :encontrar_participante, except: %i[criar listar]
 
     # Método de listgem de participante
     def listar
