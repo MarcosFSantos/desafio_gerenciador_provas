@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_072053) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_12_195643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,8 +27,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_072053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "usuarios_id"
-    t.bigint "usuario_id"
-    t.index ["usuario_id"], name: "index_participantes_on_usuario_id"
     t.index ["usuarios_id"], name: "index_participantes_on_usuarios_id"
   end
 
@@ -51,6 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_072053) do
 
   add_foreign_key "participante_provas", "participantes"
   add_foreign_key "participante_provas", "provas"
-  add_foreign_key "participantes", "usuarios"
   add_foreign_key "participantes", "usuarios", column: "usuarios_id"
 end

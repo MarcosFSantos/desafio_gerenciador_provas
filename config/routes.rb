@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/autenticacao/login", to: "autenticacao#login"
   # Rotas de Participantes
   get "/participantes", to: "participantes#listar"
+  get "/participantes/:id/provas", to: "participantes#listar_provas", constraints: { id: /[1-9]\d*/ }
   get "/participantes/:id", to: "participantes#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/participantes", to: "participantes#criar"
   put "/participantes/:id", to: "participantes#atualizar", constraints: { id: /[1-9]\d*/ }
