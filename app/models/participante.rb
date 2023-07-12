@@ -6,4 +6,6 @@ class Participante < ApplicationRecord
         foreign_key: "usuarios_id", # Chave estrangeira de usuarios presente na tabela participantes.
         inverse_of: :participantes # Método das instâncias de 'Usuario' responsável por retornar o array de instâncias desta classe.
     )
+    has_many :participante_prova, dependent: :destroy
+    has_many :provas, through: :participante_prova
 end
