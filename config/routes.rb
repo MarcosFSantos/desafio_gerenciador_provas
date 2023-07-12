@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete "/participantes/:id", to: "participantes#destruir", constraints: { id: /[1-9]\d*/ }
   # Rotas de Provas
   get "/provas", to: "provas#listar"
-  get "/provas/:id/provas", to: "provas#listar_participantes", constraints: { id: /[1-9]\d*/ }
+  get "/provas/:id/participantes", to: "provas#listar_participantes", constraints: { id: /[1-9]\d*/ }
   get "/provas/:id", to: "provas#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/provas", to: "provas#criar"
   put "/provas/:id", to: "provas#atualizar", constraints: { id: /[1-9]\d*/ }
