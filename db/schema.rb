@@ -10,23 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_004134) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_12_072053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "participante_provas", force: :cascade do |t|
-    t.bigint "participantes_id", null: false
-    t.bigint "provas_id", null: false
+  create_table "participante_provas", id: false, force: :cascade do |t|
+    t.bigint "participante_id", null: false
+    t.bigint "prova_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["participantes_id"], name: "index_participante_provas_on_participantes_id"
-    t.index ["provas_id"], name: "index_participante_provas_on_provas_id"
+    t.index ["participante_id"], name: "index_participante_provas_on_participante_id"
+    t.index ["prova_id"], name: "index_participante_provas_on_prova_id"
   end
 
   create_table "participantes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "usuarios_id"
+    t.bigint "usuario_id"
+    t.index ["usuario_id"], name: "index_participantes_on_usuario_id"
     t.index ["usuarios_id"], name: "index_participantes_on_usuarios_id"
   end
 
@@ -47,7 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_004134) do
     t.integer "perfil", default: 1
   end
 
-  add_foreign_key "participante_provas", "participantes", column: "participantes_id"
-  add_foreign_key "participante_provas", "provas", column: "provas_id"
+  add_foreign_key "participante_provas", "participantes"
+  add_foreign_key "participante_provas", "provas"
+  add_foreign_key "participantes", "usuarios"
   add_foreign_key "participantes", "usuarios", column: "usuarios_id"
 end

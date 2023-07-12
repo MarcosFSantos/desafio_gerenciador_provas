@@ -1,11 +1,5 @@
 class Participante < ApplicationRecord
-
-    belongs_to(
-        :usuario, # Método reponsável por retornar uma instância de 'Usuario' da instância.
-        class_name: "Usuario", # Nome da classe que Participante tem relação.
-        foreign_key: "usuarios_id", # Chave estrangeira de usuarios presente na tabela participantes.
-        inverse_of: :participantes # Método das instâncias de 'Usuario' responsável por retornar o array de instâncias desta classe.
-    )
-    has_many :participante_prova, dependent: :destroy
-    has_many :provas, through: :participante_prova
+  belongs_to :usuario, class_name: "Usuario", foreign_key: "usuario_id", inverse_of: :participantes
+  has_many :participante_provas, dependent: :destroy
+  has_many :provas, through: :participante_provas
 end
