@@ -16,5 +16,5 @@ class Questao < ApplicationRecord
     # Edita uma resposta
     def editar_resposta(indice, nova_resposta)
         self.respostas[indice] = nova_resposta
-end
+    end
 end
