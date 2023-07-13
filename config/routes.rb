@@ -29,4 +29,10 @@ Rails.application.routes.draw do
   post "/provas/:prova_id/questoes", to: "questoes#criar", constraints: { prova_id: /[1-9]\d*/ }
   put "/provas/:prova_id/questoes/:questao_id", to: "questoes#atualizar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
   delete "/provas/:prova_id/questoes/:questao_id", to: "questoes#destruir", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
+  # Rotas de Escolhas
+  get "/provas/:prova_id/questoes/:questao_id/escolhas", to: "escolhas#listar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
+  get "/provas/:prova_id/questoes/:questao_id/escolhas/:escolha_id", to: "escolhas#mostrar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/, escolha_id: /[1-9]\d*/ }
+  post "/provas/:prova_id/questoes/:questao_id/escolhas", to: "escolhas#criar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
+  put "/provas/:prova_id/questoes/:questao_id/escolhas/:escolha_id", to: "escolhas#atualizar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/, escolha_id: /[1-9]\d*/ }
+  delete "/provas/:prova_id/questoes/:questao_id/escolhas/:escolha_id", to: "escolhas#destruir", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/, escolha_id: /[1-9]\d*/ }
 end
