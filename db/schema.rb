@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_012917) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_035835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_012917) do
     t.string "enunciado"
     t.string "respostas", default: [], array: true
     t.integer "resposta_correta"
+    t.bigint "prova_id"
+    t.index ["prova_id"], name: "index_questoes_on_prova_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -58,4 +60,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_012917) do
   add_foreign_key "participante_provas", "participantes"
   add_foreign_key "participante_provas", "provas"
   add_foreign_key "participantes", "usuarios", column: "usuarios_id"
+  add_foreign_key "questoes", "provas"
 end
