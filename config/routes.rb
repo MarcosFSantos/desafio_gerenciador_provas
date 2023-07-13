@@ -23,4 +23,10 @@ Rails.application.routes.draw do
   post "/provas", to: "provas#criar"
   put "/provas/:id", to: "provas#atualizar", constraints: { id: /[1-9]\d*/ }
   delete "/provas/:id", to: "provas#destruir", constraints: { id: /[1-9]\d*/ }
+  # Rotas de Questões de Provas
+  get "/provas/:prova_id/questoes", to: "questoes#listar", constraints: { prova_id: /[1-9]\d*/ }
+  get "/provas/:prova_id/questoes/:questao_id", to: "questoes#mostrar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
+  post "/provas/:prova_id/questoes", to: "questoes#criar", constraints: { prova_id: /[1-9]\d*/ }
+  put "/provas/:prova_id/questoes/:questao_id", to: "questoes#atualizar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
+  delete "/provas/:prova_id/questoes/:questao_id", to: "questoes#destruir", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
 end
