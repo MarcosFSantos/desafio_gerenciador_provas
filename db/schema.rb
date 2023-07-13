@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_235449) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_012917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,15 +30,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_235449) do
     t.index ["usuarios_id"], name: "index_participantes_on_usuarios_id"
   end
 
-  create_table "participantes_provas", id: false, force: :cascade do |t|
-    t.bigint "participante_id", null: false
-    t.bigint "prova_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["participante_id"], name: "index_participantes_provas_on_participante_id"
-    t.index ["prova_id"], name: "index_participantes_provas_on_prova_id"
-  end
-
   create_table "provas", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,9 +37,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_235449) do
     t.integer "duracao"
   end
 
-  create_table "questaos", force: :cascade do |t|
+  create_table "questoes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "enunciado"
+    t.string "respostas", default: [], array: true
+    t.integer "resposta_correta"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -64,6 +58,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_235449) do
   add_foreign_key "participante_provas", "participantes"
   add_foreign_key "participante_provas", "provas"
   add_foreign_key "participantes", "usuarios", column: "usuarios_id"
-  add_foreign_key "participantes_provas", "participantes"
-  add_foreign_key "participantes_provas", "provas"
 end
