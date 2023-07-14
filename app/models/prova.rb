@@ -7,4 +7,20 @@ class Prova < ApplicationRecord
 
     has_many :questoes, class_name: "Questao", foreign_key: "prova_id", dependent: :destroy, inverse_of: :prova
     accepts_nested_attributes_for :questoes, reject_if: :all_blank, allow_destroy: true
+
+    # Retorna as respostas de cada questão da prova
+    def respostas
+        respostas = {}
+        questoes.each do |questao|
+            escolhas_questao = questao.escolhas.pluck(:identificador)
+            escolha_correta = questao.resposta_correta
+            # Verifica se a escolha correta está entre as escolhas da questão, se não estiver a escolha correta é retornada como nil para a questão ser anulada
+            if escolhas_questao.include?(escolha_correta)
+                respostas[questao.id] = escolha_correta
+            else
+                respostas[questao.id] = nil
+            end
+        end
+        respostas
+    end
 end
