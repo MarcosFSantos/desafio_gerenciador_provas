@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_213506) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_14_192423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_213506) do
     t.datetime "updated_at", null: false
     t.string "texto"
     t.bigint "questao_id"
+    t.integer "identificador"
+    t.index ["questao_id", "identificador"], name: "index_escolhas_on_questao_id_and_identificador", unique: true
     t.index ["questao_id"], name: "index_escolhas_on_questao_id"
   end
 

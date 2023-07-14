@@ -69,7 +69,7 @@ class EscolhasController < ApplicationController
     end
     
     def parametros_escolha
-        params.permit(:texto)
+        params.permit(:identificador, :texto)
     end
     
 end

@@ -68,7 +68,7 @@ class QuestoesController < ApplicationController
     end
 
     def parametros_questao
-        params.permit(:enunciado, :resposta_correta, escolhas_attributes: [:texto])
+        params.permit(:enunciado, :resposta_correta, escolhas_attributes: [:identificador, :texto])
     end
     
 end
