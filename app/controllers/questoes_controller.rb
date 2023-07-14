@@ -4,6 +4,13 @@ class QuestoesController < ApplicationController
 
     # Método de listgem de questões de provas
     def listar
+        @prova = Prova.find_by(id: params[:prova_id])
+
+        if @prova.nil?
+            render json: { errors: 'Prova não encontrada' }, status: :not_found
+            return
+        end
+
         render json: @prova.questoes, status: :ok
     end
 
@@ -61,7 +68,7 @@ class QuestoesController < ApplicationController
     end
 
     def parametros_questao
-        params.permit(:enunciado, :resposta_correta, respostas: {})
+        params.permit(:enunciado, :resposta_correta, escolhas_attributes: [:texto])
     end
     
 end

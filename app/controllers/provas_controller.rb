@@ -52,6 +52,6 @@ class ProvasController < ApplicationController
     end
     
     def parametros_prova
-        params.permit(:titulo, :duracao)
+        params.permit(:titulo, :duracao, questoes_attributes: [ :enunciado, :resposta_correta, escolhas_attributes: [:texto]])
     end
 end
