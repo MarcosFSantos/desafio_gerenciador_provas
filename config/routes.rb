@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Rotas de Participantes
   get "/participantes", to: "participantes#listar"
   get "/participantes/:id/provas", to: "participantes#listar_provas", constraints: { id: /[1-9]\d*/ }
+  get "/participantes/:id/provas/:prova_id", to: "participantes#mostrar_prova", constraints: { id: /[1-9]\d*/ , prova_id: /[1-9]\d*/ }
   get "/participantes/:id", to: "participantes#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/participantes", to: "participantes#criar"
   put "/participantes/:id", to: "participantes#atualizar", constraints: { id: /[1-9]\d*/ }
@@ -35,4 +36,7 @@ Rails.application.routes.draw do
   post "/provas/:prova_id/questoes/:questao_id/escolhas", to: "escolhas#criar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/ }
   put "/provas/:prova_id/questoes/:questao_id/escolhas/:escolha_id", to: "escolhas#atualizar", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/, escolha_id: /[1-9]\d*/ }
   delete "/provas/:prova_id/questoes/:questao_id/escolhas/:escolha_id", to: "escolhas#destruir", constraints: { prova_id: /[1-9]\d*/ , questao_id: /[1-9]\d*/, escolha_id: /[1-9]\d*/ }
+  # Rotas de Respostas
+  post "/participantes/:participante_id/provas/:prova_id/resposta", to: "respostas#criar", constraints: { participante_id: /[1-9]\d*/ ,prova_id: /[1-9]\d*/ }
+  put "/participantes/:participante_id/provas/:prova_id/resposta", to: "respostas#atualizar", constraints: { participante_id: /[1-9]\d*/ ,prova_id: /[1-9]\d*/ }
 end

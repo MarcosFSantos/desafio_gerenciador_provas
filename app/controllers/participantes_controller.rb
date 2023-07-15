@@ -12,6 +12,9 @@ class ParticipantesController < ApplicationController
         render json: @participante.provas, status: :ok
     end
     
+    def mostrar_prova
+        
+    end
 
     # Método de exibição de um participante
     def mostrar
