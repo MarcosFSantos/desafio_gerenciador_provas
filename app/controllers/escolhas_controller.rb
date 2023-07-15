@@ -24,7 +24,7 @@ class EscolhasController < ApplicationController
         @questao = Questao.find_by(id: params[:questao_id])
 
         if @questao.nil?
-            render json: { errors: 'Prova não encontrada' }, status: :not_found
+            render json: { errors: 'Questão não encontrada' }, status: :not_found
             return
         end
 

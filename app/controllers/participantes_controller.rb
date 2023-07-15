@@ -14,7 +14,19 @@ class ParticipantesController < ApplicationController
 
     def inscrever_prova
         @prova = Prova.find_by_id!(params[:prova_id])
+
+        if @prova.nil?
+            render json: { errors: 'Prova não encontrada' }, status: :not_found
+            return
+        end
+
         @participante = Participante.find_by_id!(params[:id])
+
+        if @participante.nil?
+            render json: { errors: 'Participante não encontrado' }, status: :not_found
+            return
+        end
+
         @participante.provas << @prova
         @participante.save
     end
@@ -30,7 +42,31 @@ class ParticipantesController < ApplicationController
     end
 
     def mostrar_nota_prova
-        
+        @resposta = Resposta.find_by(participante_id: params[:id], prova_id: params[:prova_id])
+
+        if @resposta.nil?
+            render json: { errors: 'Resposta não encontrada' }, status: :not_found
+            return
+        end
+
+        @prova = @participante.provas.find_by_id(params[:prova_id])
+
+        if @prova.nil?
+            render json: { errors: 'Prova não encontrada' }, status: :not_found
+            return
+        end
+
+        @resultados = {}
+        @resposta.dados.each do |questao_id, resposta_usuario|
+            resposta_correta = @prova.respostas[questao_id.to_i]
+          
+            if resposta_correta && resposta_usuario == resposta_correta
+              @resultados[questao_id] = :acertou
+            else
+              @resultados[questao_id] = :errou
+            end
+        end
+        render json: @resultados, status: :ok
     end
 
     # Método de exibição de um participante
