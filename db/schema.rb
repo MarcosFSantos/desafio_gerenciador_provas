@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_010517) do
   end
 
   create_table "respostas", force: :cascade do |t|
-    t.string "dados"
+    t.jsonb "dados", default: {}
     t.bigint "prova_id"
     t.bigint "participante_id"
     t.datetime "created_at", null: false

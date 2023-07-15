@@ -11,17 +11,21 @@ class ParticipantesController < ApplicationController
     def listar_provas
         render json: @participante.provas, status: :ok
     end
+
+    def inscrever_prova
+        @prova = Prova.find_by_id!(params[:prova_id])
+        @participante = Participante.find_by_id!(params[:id])
+        @participante.provas << @prova
+        @participante.save
+    end
     
     def mostrar_prova
-        if @participante.provas.pluck(:id).include?(:prova_id) # Verifica se o participante esta escrito em alguma prova com o id passado
-            @prova = Prova.find_by_id!(params[:prova_id])
-            if @prova = nil?
-                render json: { errors: 'Prova não encontrada' }, status: :not_found
-                return
-            end
-            render json: @prova, status: :ok
+        @prova = @participante.provas.find_by_id(params[:prova_id])
+        
+        if @prova.nil?
+            render json: { error: 'Prova não encontrada' }, status: :not_found
         else
-            render json: { error: 'Participante não está inscrito nessa prova' }, status: :unauthorized
+            render json: @prova, status: :ok
         end
     end
 

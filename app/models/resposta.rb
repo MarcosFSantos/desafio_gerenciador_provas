@@ -1,6 +1,6 @@
 class Resposta < ApplicationRecord
   
-  serialize :dados, Hash
+  attribute :dados, :jsonb, default: {}
 
   belongs_to :prova
   belongs_to :participante

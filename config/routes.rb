@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Rotas de Participantes
   get "/participantes", to: "participantes#listar"
   get "/participantes/:id/provas", to: "participantes#listar_provas", constraints: { id: /[1-9]\d*/ }
+  post "/participantes/:id/provas/:prova_id", to: "participantes#inscrever_prova", constraints: { id: /[1-9]\d*/ , prova_id: /[1-9]\d*/ }
   get "/participantes/:id/provas/:prova_id", to: "participantes#mostrar_prova", constraints: { id: /[1-9]\d*/ , prova_id: /[1-9]\d*/ }
   get "/participantes/:id", to: "participantes#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/participantes", to: "participantes#criar"

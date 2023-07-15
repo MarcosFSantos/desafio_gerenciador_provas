@@ -15,7 +15,7 @@ class RespostasController < ApplicationController
             render json: { errors: 'Participante não encontrado' }, status: :not_found
         end
 
-        @resposta = Resposta.create(parametros_resposta)
+        @resposta = Resposta.new(parametros_resposta)
         @resposta.prova = @prova
         @resposta.participante = @participante
 
@@ -29,15 +29,15 @@ class RespostasController < ApplicationController
     # Método de edição de uma resposta de prova
     def atualizar
         @resposta = Resposta.find_by(participante_id: params[:participante_id], prova_id: params[:prova_id])
-        unless @reposta.update(parametros_resposta)
-            render json: { errors: @reposta.errors.full_messages }, status: :ok
+        unless @resposta.update(parametros_resposta)
+          render json: { errors: @resposta.errors.full_messages }, status: :ok
         end
     end
     
     private
 
     def parametros_resposta
-        params.permit(:dados)
+        params.permit(dados: {})
     end
     
 end
