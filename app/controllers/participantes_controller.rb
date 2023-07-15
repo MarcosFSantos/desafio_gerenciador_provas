@@ -13,7 +13,16 @@ class ParticipantesController < ApplicationController
     end
     
     def mostrar_prova
-        
+        if @participante.provas.pluck(:id).include?(:prova_id) # Verifica se o participante esta escrito em alguma prova com o id passado
+            @prova = Prova.find_by_id!(params[:prova_id])
+            if @prova = nil?
+                render json: { errors: 'Prova não encontrada' }, status: :not_found
+                return
+            end
+            render json: @prova, status: :ok
+        else
+            render json: { error: 'Participante não está inscrito nessa prova' }, status: :unauthorized
+        end
     end
 
     # Método de exibição de um participante
