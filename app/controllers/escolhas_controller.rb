@@ -30,7 +30,7 @@ class EscolhasController < ApplicationController
 
         @escolha = @questao.escolhas.build(parametros_escolha)
 
-        if test
+        if @escolha.save
             render json: @escolha, status: :ok
         else
             render json: { errors: @escolha.errors.full_messages }, status: :unprocessable_entity
