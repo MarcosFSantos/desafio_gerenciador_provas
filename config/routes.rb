@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # Rotas de Provas
   get "/provas", to: "provas#listar"
   get "/provas/:id/participantes", to: "provas#listar_participantes", constraints: { id: /[1-9]\d*/ }
+  get "/provas/:id/participantes/ranking", to: "provas#ranking_notas", constraints: { id: /[1-9]\d*/ }
   get "/provas/:id", to: "provas#mostrar", constraints: { id: /[1-9]\d*/ }
   post "/provas", to: "provas#criar"
   put "/provas/:id", to: "provas#atualizar", constraints: { id: /[1-9]\d*/ }

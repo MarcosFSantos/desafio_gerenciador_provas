@@ -17,6 +17,11 @@ class ProvasController < ApplicationController
     def listar_participantes
         render json: @prova.participantes, status: :ok
     end
+
+    def ranking_notas
+        
+    end
+    
     
     # Método de criação de um usuário
     def criar

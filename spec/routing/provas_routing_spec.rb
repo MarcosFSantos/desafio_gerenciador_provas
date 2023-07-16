@@ -14,6 +14,14 @@ RSpec.describe "Testes de rotas para provas" do
             expect(get "/provas/0/participantes").not_to be_routable
         end
     end
+    context "Testes de rotas de listagem de notas de participantes de provas" do
+        it "rota GET /provas/1/participantes/ranking para controlador provas#ranking_notas" do
+            expect(get "/provas/1/participantes/ranking").to route_to("provas#ranking_notas", id: "1")
+        end
+        it "rota GET /provas/1/participantes/ranking deve não deve ser acessível" do
+            expect(get "/provas/0/participantes/ranking").not_to be_routable
+        end
+    end
     context "Testes de rotas de exibição individual de provas" do
         it "rota GET /provas/1 para controlador provas#mostrar" do
             expect(get "/provas/1").to route_to("provas#mostrar", id: "1")
