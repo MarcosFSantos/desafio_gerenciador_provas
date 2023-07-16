@@ -16,6 +16,7 @@ class EscolhasController < ApplicationController
 
     # Método de exibição de uma escolha de uma questão de prova
     def mostrar
+        autorizar_usuario
         render json: @escolha, status: :ok
     end
     
@@ -40,6 +41,7 @@ class EscolhasController < ApplicationController
     
     # Método de edição de uma escolha de uma questão de prova
     def atualizar
+        autorizar_usuario
         unless @escolha.update(parametros_escolha)
             render json: { errors: @ecolha.errors.full_messages }, status: :ok
         end
@@ -47,6 +49,7 @@ class EscolhasController < ApplicationController
     
     # Método de exclusão de uma escolha de uma questão de prova
     def destruir
+        autorizar_usuario
         @escolha.destroy
     end
 
@@ -70,6 +73,13 @@ class EscolhasController < ApplicationController
     
     def parametros_escolha
         params.permit(:identificador, :texto)
+    end
+
+    def autorizar_usuario
+        @prova = Prova.find_by(id: params[:prova_id])
+        unless @prova.usuario == @usuario_atual
+            raise StandardError.new('Acesso negado'), status: :unauthorized
+        end
     end
     
 end

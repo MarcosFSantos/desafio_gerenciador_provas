@@ -16,6 +16,7 @@ class QuestoesController < ApplicationController
 
     # Método de exibição de uma questão de prova
     def mostrar
+        autorizar_usuario
         render json: @questao, status: :ok
     end
     
@@ -39,6 +40,7 @@ class QuestoesController < ApplicationController
     
     # Método de edição de uma questão de prova
     def atualizar
+        autorizar_usuario
         unless @questao.update(parametros_questao)
             render json: { errors: @questao.errors.full_messages }, status: :ok
         end
@@ -46,6 +48,7 @@ class QuestoesController < ApplicationController
     
     # Método de exclusão de uma questão de prova
     def destruir
+        autorizar_usuario
         @questao.destroy
     end
 
@@ -69,6 +72,13 @@ class QuestoesController < ApplicationController
 
     def parametros_questao
         params.permit(:enunciado, :resposta_correta, escolhas_attributes: [:identificador, :texto])
+    end
+
+    def autorizar_usuario
+        @prova = Prova.find_by(id: params[:prova_id])
+        unless @prova.usuario == @usuario_atual
+            raise StandardError.new('Acesso negado'), status: :unauthorized
+        end
     end
     
 end

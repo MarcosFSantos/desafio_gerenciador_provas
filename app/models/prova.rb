@@ -10,6 +10,8 @@ class Prova < ApplicationRecord
     has_many :questoes, class_name: "Questao", foreign_key: "prova_id", dependent: :destroy, inverse_of: :prova
     accepts_nested_attributes_for :questoes, reject_if: :all_blank, allow_destroy: true
 
+    belongs_to :usuario, class_name: "Usuario", foreign_key: "usuario_id", inverse_of: :prova
+
     # Retorna as respostas de cada questão da prova
     def respostas
         respostas = {}

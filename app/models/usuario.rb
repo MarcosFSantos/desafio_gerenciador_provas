@@ -8,5 +8,7 @@ class Usuario < ApplicationRecord
 
     enum perfil: { administrador: 0, participante: 1 }, _default: :participante
 
+    has_one :prova, class_name: "Prova", foreign_key: "usuario_id", dependent: :destroy, inverse_of: :usuario
+
     has_many :participantes, foreign_key: "usuarios_id", dependent: :destroy
 end

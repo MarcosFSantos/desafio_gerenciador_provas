@@ -10,6 +10,7 @@ class ProvasController < ApplicationController
 
     # Método de exibição de um usuário
     def mostrar
+        autorizar_usuario
         render json: @prova, status: :ok
     end
 
@@ -19,6 +20,7 @@ class ProvasController < ApplicationController
     end
 
     def ranking_notas
+        autorizar_usuario
         CalcularRankingParticipantesJob.perform_async(params[:id])
         @ranking = @prova.ranking
         
@@ -32,6 +34,7 @@ class ProvasController < ApplicationController
     # Método de criação de um usuário
     def criar
         @prova = Prova.new(parametros_prova)
+        @prova.usuario = @usuario_atual
         if @prova.save
             render json: @prova, status: :ok
         else
@@ -41,13 +44,15 @@ class ProvasController < ApplicationController
     
     # Método de edição de um usuário
     def atualizar
+        autorizar_usuario
         unless @prova.update(parametros_prova)
-            render json: { erros: @prova.errors.full_messages }, status: :ok
+            render json: { errors: @prova.errors.full_messages }, status: :ok
         end
     end
     
     # Método de exclusão de um usuário
     def destruir
+        autorizar_usuario
         @prova.destroy
     end
 
@@ -65,4 +70,11 @@ class ProvasController < ApplicationController
     def parametros_prova
         params.permit(:titulo, :duracao, questoes_attributes: [ :enunciado, :resposta_correta, escolhas_attributes: [:identificador, :texto]])
     end
+
+    def autorizar_usuario
+        unless @prova.usuario == @usuario_atual
+            raise StandardError.new('Acesso negado'), status: :unauthorized
+        end
+    end
+    
 end

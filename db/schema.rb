@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_063743) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_190245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_063743) do
     t.datetime "updated_at", null: false
     t.string "titulo"
     t.integer "duracao"
+    t.bigint "usuario_id"
+    t.index ["usuario_id"], name: "index_provas_on_usuario_id"
   end
 
   create_table "questoes", force: :cascade do |t|
@@ -89,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_063743) do
   add_foreign_key "participante_provas", "participantes"
   add_foreign_key "participante_provas", "provas"
   add_foreign_key "participantes", "usuarios", column: "usuarios_id"
+  add_foreign_key "provas", "usuarios"
   add_foreign_key "questoes", "provas"
   add_foreign_key "rankings", "provas"
   add_foreign_key "respostas", "participantes"
