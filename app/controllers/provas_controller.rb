@@ -19,9 +19,14 @@ class ProvasController < ApplicationController
     end
 
     def ranking_notas
+        @ranking = CalcularRankingParticipantesJob.perform_async(params[:id])
         
+        if @ranking.nil?
+          render json: { message: 'Carregando' }, status: :accepted
+        else
+          render json: @ranking, status: :ok
+        end
     end
-    
     
     # Método de criação de um usuário
     def criar

@@ -32,6 +32,11 @@ class CalcularNotaJob
     
     # Calcula a nota dividindo o número de acertos pelo total de questões
     total_questoes = @resposta.dados.size
+
+    if total_questoes.zero?
+      raise StandardError, 'Não há questões na resposta'
+    end
+
     @nota = @resultados_corretos / total_questoes * 10
     @resposta.nota = @nota
     @resposta.save
