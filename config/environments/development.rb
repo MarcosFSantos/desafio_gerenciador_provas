@@ -30,6 +30,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.cache_store = :redis_cache_store, { url: 'redis://redis:6379/0' }
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
