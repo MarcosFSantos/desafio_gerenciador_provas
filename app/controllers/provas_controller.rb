@@ -19,12 +19,13 @@ class ProvasController < ApplicationController
     end
 
     def ranking_notas
-        @ranking = CalcularRankingParticipantesJob.perform_async(params[:id])
+        CalcularRankingParticipantesJob.perform_async(params[:id])
+        @ranking = @prova.ranking
         
         if @ranking.nil?
           render json: { message: 'Carregando' }, status: :accepted
         else
-          render json: @ranking, status: :ok
+          render json: @ranking.dados.sort_by { |nota, _| -nota }.to_h, status: :ok
         end
     end
     

@@ -3,7 +3,7 @@ class CalcularRankingParticipantesJob
 
   def perform(prova_id)
     @prova = Prova.find_by_id(prova_id)
-    @ranking = {}
+    @lista_ranking = {}
     lista_participantes = {}
     @prova.participantes.each do |participante|
       @resposta = Resposta.find_by(participante_id: participante.id, prova_id: prova_id)
@@ -11,7 +11,9 @@ class CalcularRankingParticipantesJob
       next if @resposta.nota.nil?
       lista_participantes[@resposta.nota] = participante
     end
-    @ranking = lista_participantes.sort_by { |nota, _| -nota }.to_h
-    @ranking
+    @lista_ranking = lista_participantes.sort_by { |nota, _| -nota }.to_h
+    @ranking = Ranking.new(dados: @lista_ranking)
+    @prova.ranking = @ranking
+    @ranking.save
   end
 end
