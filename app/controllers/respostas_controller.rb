@@ -20,6 +20,7 @@ class RespostasController < ApplicationController
         @resposta.participante = @participante
 
         if @resposta.save
+            calcular_nota_participante(params[:participante_id], params[:prova_id])
             render json: @resposta, status: :ok
         else
             render json: { errors: @resposta.errors.full_messages }, status: :unprocessable_entity
@@ -29,8 +30,10 @@ class RespostasController < ApplicationController
     # Método de edição de uma resposta de prova
     def atualizar
         @resposta = Resposta.find_by(participante_id: params[:participante_id], prova_id: params[:prova_id])
-        unless @resposta.update(parametros_resposta)
-          render json: { errors: @resposta.errors.full_messages }, status: :ok
+        if @resposta.update(parametros_resposta)
+            calcular_nota_participante(params[:participante_id], params[:prova_id])
+        else
+            render json: { errors: @resposta.errors.full_messages }, status: :ok
         end
     end
     
@@ -38,6 +41,10 @@ class RespostasController < ApplicationController
 
     def parametros_resposta
         params.permit(dados: {})
+    end
+    
+    def calcular_nota_participante(participante_id, prova_id)
+        CalcularNotaJob.perform_async(participante_id, prova_id)
     end
     
 end

@@ -49,24 +49,11 @@ class ParticipantesController < ApplicationController
             return
         end
 
-        @prova = @participante.provas.find_by_id(params[:prova_id])
-
-        if @prova.nil?
-            render json: { errors: 'Prova não encontrada' }, status: :not_found
-            return
+        if @resposta.nota.nil?
+            render json: { errors: 'Prova ainda não respondida' }, status: :not_found
         end
 
-        @resultados = {}
-        @resposta.dados.each do |questao_id, resposta_usuario|
-            resposta_correta = @prova.respostas[questao_id.to_i]
-          
-            if resposta_correta && resposta_usuario == resposta_correta
-              @resultados[questao_id] = :acertou
-            else
-              @resultados[questao_id] = :errou
-            end
-        end
-        render json: @resultados, status: :ok
+        render json: { nota: @resposta.nota }, status: :ok
     end
 
     # Método de exibição de um participante
