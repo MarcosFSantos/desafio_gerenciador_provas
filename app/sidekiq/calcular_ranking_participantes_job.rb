@@ -9,9 +9,9 @@ class CalcularRankingParticipantesJob
       @resposta = Resposta.find_by(participante_id: participante.id, prova_id: prova_id)
       next unless @resposta
       next if @resposta.nota.nil?
-      lista_participantes[@resposta.nota] = participante
+      lista_participantes[participante.id] = { nota: @resposta.nota, participante: participante }
     end
-    @lista_ranking = lista_participantes.sort_by { |nota, _| -nota }.to_h
+    @lista_ranking = lista_participantes.sort_by{ |_, data| -data[:nota] }.to_h
     @ranking = Ranking.new(dados: @lista_ranking)
     @prova.ranking = @ranking
     @ranking.save
