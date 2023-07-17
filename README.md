@@ -20,7 +20,7 @@ Com o Docker Compose, PostgreSQL e o Git instalados, agora é necessário clonar
 
 * Clicar no Botão "Code" e copiar o código HTTPS do Repositório.
 
-![imagem1](examples\readme1.png)
+![imagem1](examples/readme1.png)
 
 * Abrir o terminal Git na pasta que você desejar manter a pasta do projeto instalado.
 
@@ -36,17 +36,17 @@ git clone "https://github.com/MarcosFSantos/desafio_gerenciador_provas.git"
 
 Ao abrir o projeto com a IDE de sua preferência, será necessário abrir o arquivo .env e modifica-lo para conter as variáveis de ambiente do banco de dados, ao abrir o arquivo .env, o código esperado é esse:
 
-![Imagem2](examples\readme2.png)
+![Imagem2](examples/readme2.png)
 
 Siga as seguintes etapas para o configuração do banco de dados do projeto:
 
 * Acesse o pgAdmin que foi instalado junto com o gerenciador de banco de dados postgreSQL.
 
-![Imagem3](examples\readme3.png)
+![Imagem3](examples/readme3.png)
 
 * Abra a seguinte guia no lado superior esquerdo:
 
-![Imagem4](examples\readme4.png)
+![Imagem4](examples/readme4.png)
 
 * Na aba "Connection" será possível ver as informações "Host name/address" e "Username".
 
